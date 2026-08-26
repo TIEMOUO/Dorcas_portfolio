@@ -7,6 +7,7 @@ from .views import (
     SkillViewSet,
     ExperienceViewSet,
     ContactViewSet,
+    CommentViewSet,
 )
 
 router = DefaultRouter()
@@ -18,5 +19,6 @@ router.register(r'services', ServiceViewSet, basename='service')
 router.register(r'skills', SkillViewSet, basename='skill')
 router.register(r'experiences', ExperienceViewSet, basename='experience')
 router.register(r'contacts', ContactViewSet, basename='contact')
+router.register(r'comments', CommentViewSet, basename='comment')
 
 urlpatterns = router.urls

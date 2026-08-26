@@ -1,23 +1,53 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPalette, faPen, faCode, faDatabase, faVideo, faLock, faRocket, faLayerGroup, faFileCode } from "@fortawesome/free-solid-svg-icons";
-import { faFigma, faGithub, faReact, faNodeJs } from "@fortawesome/free-brands-svg-icons";
+import { faPalette, faPen, faCode, faDatabase, faVideo, faLock, faRocket, faLayerGroup, faFileCode, faServer, faGlobe, faMobile, faChartLine, faBrain, faCloud, faLock as faLockSolid, faCogs } from "@fortawesome/free-solid-svg-icons";
+import { faFigma, faGithub, faReact, faNodeJs, faPython, faJava, faPhp, faLaravel, faDocker, faAws, faGitAlt, faAngular, faJs, faHtml5, faCss3Alt, faSass, faBootstrap, faVuejs, faAmazon, faGoogle, faMicrosoft } from "@fortawesome/free-brands-svg-icons";
 import { getSkills } from "../../services/api";
-import AnimatedSection from "../Layout/AnimatedSection";
+import AnimatedSection, { StaggerContainer, StaggerItem } from "../Layout/AnimatedSection";
 
 const iconMap = {
-  faPalette,
-  faPen,
-  faCode,
-  faDatabase,
-  faVideo,
-  faRocket,
-  faLayerGroup,
-  faFileCode,
-  faFigma,
-  faGithub,
-  faReact,
-  faNodeJs,
+  'fa-brands fa-react': faReact,
+  'fa-brands fa-angular': faAngular,
+  'fa-brands fa-js': faJs,
+  'fa-brands fa-node-js': faNodeJs,
+  'fa-brands fa-python': faPython,
+  'fa-brands fa-java': faJava,
+  'fa-brands fa-php': faPhp,
+  'fa-brands fa-laravel': faLaravel,
+  'fa-brands fa-docker': faDocker,
+  'fa-brands fa-aws': faAws,
+  'fa-brands fa-git-alt': faGitAlt,
+  'fa-brands fa-github': faGithub,
+  'fa-brands fa-figma': faFigma,
+  'fa-brands fa-html5': faHtml5,
+  'fa-brands fa-css3-alt': faCss3Alt,
+  'fa-brands fa-sass': faSass,
+  'fa-brands fa-bootstrap': faBootstrap,
+  'fa-brands fa-vuejs': faVuejs,
+  'fa-brands fa-amazon': faAmazon,
+  'fa-brands fa-google': faGoogle,
+  'fa-brands fa-microsoft': faMicrosoft,
+  'fa-solid fa-database': faDatabase,
+  'fa-solid fa-server': faServer,
+  'fa-solid fa-code': faCode,
+  'fa-solid fa-palette': faPalette,
+  'fa-solid fa-mobile': faMobile,
+  'fa-solid fa-globe': faGlobe,
+  'fa-solid fa-lock': faLockSolid,
+  'fa-solid fa-cloud': faCloud,
+  'fa-solid fa-brain': faBrain,
+  'fa-solid fa-chart-line': faChartLine,
+  'fa-solid fa-pen': faPen,
+  'fa-solid fa-video': faVideo,
+  'fa-solid fa-rocket': faRocket,
+  'fa-solid fa-layer-group': faLayerGroup,
+  'fa-solid fa-file-code': faFileCode,
+  'fa-solid fa-cogs': faCogs,
+};
+
+const getIcon = (iconName) => {
+  if (!iconName) return faCode;
+  return iconMap[iconName] || faCode;
 };
 
 export default function About() {
@@ -116,39 +146,41 @@ export default function About() {
           )}
 
           {!loading && !error && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" staggerDelay={0.05}>
             {masteredSkills.map((skill, index) => (
-              <div
-                key={`mastered-${index}`}
-                className="group flex items-center justify-start gap-3 px-4 py-3.5 rounded-xl text-xs sm:text-sm font-semibold bg-blue-500/10 dark:bg-blue-500/10 text-gray-900 dark:text-blue-200 border border-blue-500/20 dark:border-blue-500/30 hover:border-blue-500 shadow-sm transform hover:-translate-y-1 transition-all duration-300 font-body"
-              >
-                <FontAwesomeIcon icon={iconMap[skill.icon] || faCode} className="text-base group-hover:scale-125 transition-transform text-blue-600 dark:text-blue-400" />
-                <span className="truncate">{skill.name}</span>
-              </div>
+              <StaggerItem key={`mastered-${index}`}>
+                <div
+                  className="group flex items-center justify-start gap-3 px-4 py-3.5 rounded-xl text-xs sm:text-sm font-semibold bg-blue-500/10 dark:bg-blue-500/10 text-gray-900 dark:text-blue-200 border border-blue-500/20 dark:border-blue-500/30 hover:border-blue-500 shadow-sm transform hover:-translate-y-1 transition-all duration-300 font-body"
+                >
+                  <FontAwesomeIcon icon={getIcon(skill.icon)} className="text-base group-hover:scale-125 transition-transform text-blue-600 dark:text-blue-400" />
+                  <span className="truncate">{skill.name}</span>
+                </div>
+              </StaggerItem>
             ))}
 
             {lockedSkills.map((skill, index) => (
-              <div
-                key={`locked-${index}`}
-                className="flex items-center justify-start gap-3 px-4 py-3.5 rounded-xl text-xs sm:text-sm font-medium bg-gray-200/60 dark:bg-[#131622] text-gray-500 dark:text-gray-500 border border-gray-300/80 dark:border-white/5 opacity-75 font-body"
-              >
-                <FontAwesomeIcon icon={iconMap[skill.icon] || faLock} className="text-sm text-blue-600/70 dark:text-blue-400/50" />
-                <span className="truncate">{skill.name}</span>
-              </div>
+              <StaggerItem key={`locked-${index}`}>
+                <div
+                  className="flex items-center justify-start gap-3 px-4 py-3.5 rounded-xl text-xs sm:text-sm font-medium bg-gray-200/60 dark:bg-[#131622] text-gray-500 dark:text-gray-500 border border-gray-300/80 dark:border-white/5 opacity-75 font-body"
+                >
+                  <FontAwesomeIcon icon={getIcon(skill.icon)} className="text-sm text-blue-600/70 dark:text-blue-400/50" />
+                  <span className="truncate">{skill.name}</span>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
           )}
 
-          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a 
-              href="#projects" 
-              className="px-8 py-3.5 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-0.5 font-body"
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="#projects"
+              className="px-6 py-3 text-sm bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-0.5 font-body"
             >
               Voir mes projets
             </a>
-            <a 
-              href="#contact" 
-              className="px-8 py-3.5 bg-white dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-900 dark:text-white font-semibold border border-gray-200 dark:border-white/10 rounded-xl transition-all duration-300 font-body"
+            <a
+              href="#contact"
+              className="px-6 py-3 text-sm bg-white dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-900 dark:text-white font-semibold border border-gray-200 dark:border-white/10 rounded-xl transition-all duration-300 font-body"
             >
               Discutons ensemble
             </a>

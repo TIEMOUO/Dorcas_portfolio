@@ -9,6 +9,8 @@ export default function ProjectDetail() {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const screenshotsPerPage = 5;
 
   useEffect(() => {
     async function fetchProject() {
@@ -172,17 +174,74 @@ export default function ProjectDetail() {
 
       <section className="py-16 lg:py-20 bg-gray-50 dark:bg-[#0b0d14] text-gray-900 dark:text-white transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          <div className="grid gap-4">
-            {(project.screenshots || []).map((screenshot, index) => (
-              <div key={index} className="overflow-hidden rounded-3xl bg-[#f8fafc] dark:bg-[#121624] border border-gray-200 dark:border-white/10 shadow-sm dark:shadow-black/20">
-                <img
-                  src={screenshot.image}
-                  alt={`${project.title} capture ${index + 1}`}
-                  className="w-full h-72 object-cover"
-                />
-              </div>
-            ))}
-          </div>
+          {(() => {
+            const allScreenshots = project.screenshots || [];
+            const totalScreenshots = allScreenshots.length;
+            const pageCount = Math.max(1, Math.ceil(totalScreenshots / screenshotsPerPage));
+            const startIndex = (currentPage - 1) * screenshotsPerPage;
+            const endIndex = startIndex + screenshotsPerPage;
+            const screenshots = allScreenshots.slice(startIndex, endIndex);
+
+            const rows = [];
+            let i = 0;
+
+            while (i < screenshots.length) {
+              if (i % 5 === 0) {
+                rows.push({ type: 'pair', items: screenshots.slice(i, i + 2) });
+                i += 2;
+              } else {
+                rows.push({ type: 'trio', items: screenshots.slice(i, i + 3) });
+                i += 3;
+              }
+            }
+
+            return (
+              <>
+                <div className="space-y-4">
+                  {rows.map((row, rowIndex) => (
+                    <div
+                      key={rowIndex}
+                      className={`flex justify-center gap-4 ${
+                        row.type === 'pair' ? 'max-w-4xl mx-auto' : ''
+                      }`}
+                    >
+                      {row.items.map((screenshot, index) => (
+                        <div
+                          key={index}
+                          className="overflow-hidden rounded-2xl bg-[#f8fafc] dark:bg-[#121624] border border-gray-200 dark:border-white/10 shadow-sm dark:shadow-black/20 flex-1 max-w-xl"
+                        >
+                          <img
+                            src={screenshot.image}
+                            alt={`${project.title} capture ${startIndex + rowIndex * 5 + index + 1}`}
+                            className="w-full h-48 sm:h-56 lg:h-64 object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+
+                {pageCount > 1 && (
+                  <div className="flex flex-wrap justify-center gap-3 mt-8">
+                    {Array.from({ length: pageCount }, (_, index) => (
+                      <button
+                        key={index}
+                        type="button"
+                        onClick={() => setCurrentPage(index + 1)}
+                        className={`w-10 h-10 rounded-full text-sm font-semibold transition font-body ${
+                          currentPage === index + 1
+                            ? "bg-blue-500 text-white"
+                            : "bg-white dark:bg-[#111827] text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-white/10"
+                        }`}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </>
+            );
+          })()}
         </div>
       </section>
     </AnimatedSection>

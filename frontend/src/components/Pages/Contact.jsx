@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faCheckCircle, faExclamationCircle, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope, faPhone, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faLinkedin, faGithub, faBehance } from "@fortawesome/free-brands-svg-icons";
+import AnimatedSection from "../Layout/AnimatedSection";
 
 export default function Contact() {
   const formRef = useRef();
@@ -39,8 +40,9 @@ export default function Contact() {
   };
 
   return (
-    <section 
-      id="contact" 
+    <AnimatedSection>
+    <section
+      id="contact"
       className="py-20 bg-gray-50 dark:bg-[#0d101d] text-gray-900 dark:text-white transition-colors duration-300"
     >
       <div className="max-w-6xl mx-auto px-6">
@@ -178,5 +180,6 @@ export default function Contact() {
 
       </div>
     </section>
+    </AnimatedSection>
   );
 }

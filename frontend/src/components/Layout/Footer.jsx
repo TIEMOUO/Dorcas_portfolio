@@ -7,7 +7,7 @@ export default function Footer() {
 
   const socialLinks = [
     { name: "GitHub", href: "https://github.com/TIEMOUO", icon: faGithub },
-    { name: "LinkedIn", href: "https://linkedin.com/in/ton-profil", icon: faLinkedin },
+    { name: "LinkedIn", href: "https://www.linkedin.com/in/dorcas-tiemouo-166131351/", icon: faLinkedin },
     { name: "Figma", href: "https://figma.com", icon: faFigma },
     { name: "Behance", href: "https://www.behance.net/dorcastiemouo", icon: faBehance },
   ];

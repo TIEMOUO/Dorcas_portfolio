@@ -512,8 +512,8 @@ export default function Hero() {
                   </a>
 
                   <a
-                    href="/cv-dorcas-tiemouo.pdf"
-                    download
+                    href="/images/CV_TIEMOUO.DORCAS.pdf"
+                    download="CV_TIEMOUO.DORCAS.pdf"
                     className="
                       px-6
                       py-3
@@ -521,7 +521,7 @@ export default function Hero() {
                       border-white/10
                       dark:border-white/10
                       border-gray-400
-                      bg-white/5
+                      bg-white/10
                       dark:bg-white/5
                       hover:bg-white/10
                       dark:hover:bg-white/10
@@ -554,7 +554,7 @@ export default function Hero() {
                 >
 
                   <a
-                    href="https://linkedin.com/in/ton-profil"
+                    href="https://www.linkedin.com/in/dorcas-tiemouo-166131351/"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"
@@ -824,16 +824,16 @@ export default function Hero() {
               Voir mes projets
             </a>
             <a
-              href="/cv-dorcas-tiemouo.pdf"
-              download
+              href="/images/CV_TIEMOUO.DORCAS.pdf"
+              download="CV_TIEMOUO.DORCAS.pdf"
               className="px-6 py-3 border border-gray-300 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-semibold rounded-lg transition-all duration-300"
-            > 
+            >
               Télécharger mon CV
             </a>
           </div>
 
           <div className="flex items-center justify-center gap-6 mb-8">
-            <a href="https://linkedin.com/in/ton-profil" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-600 hover:text-blue-500 transition-colors duration-300 text-2xl">
+            <a href="https://www.linkedin.com/in/dorcas-tiemouo-166131351/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-600 hover:text-blue-500 transition-colors duration-300 text-2xl">
               <i className="fa-brands fa-linkedin"></i>
             </a>
             <a href="https://github.com/TIEMOUO" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-gray-600 hover:text-blue-500 transition-colors duration-300 text-2xl">

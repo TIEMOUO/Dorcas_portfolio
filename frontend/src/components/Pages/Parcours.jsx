@@ -96,9 +96,9 @@ export default function Parcours() {
         <div className="text-center mb-16">
           <h2 
             style={{ fontFamily: "'Roboto Mono', monospace" }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
           >
-            Mon <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-accent-blue to-accent-cyan">Parcours</span>
+            Mon <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-sky-400 ">Parcours</span>
           </h2>
           <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-xl mx-auto font-body">
             Formation académique et expériences professionnelles.
@@ -182,21 +182,21 @@ export default function Parcours() {
             Expériences Professionnelles
           </h3>
 
-          <div className="relative">
+<AnimatedSection delay={0.1}>
             <div className="hidden lg:flex justify-center">
               <div className="flex gap-4 min-w-max px-10">
                 {experienceData.map((item, index) => (
-                  <div key={index} className="relative group flex-shrink-0">
+                  <AnimatedSection key={index} delay={index * 0.1} className="relative group flex-shrink-0">
                     <div className="flex flex-col items-center">
                       <div className="flex items-center gap-3 w-full">
                         {index !== 0 && (
                           <div className="h-0.5 w-8 bg-gradient-to-r from-blue-500/60 to-transparent dark:from-blue-400/60" />
                         )}
-                        
+
                         <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 text-white dark:text-gray-950 flex items-center justify-center shadow-lg shadow-blue-500/30 dark:shadow-blue-400/30 group-hover:scale-110 transition-transform duration-300 z-10">
                           <FontAwesomeIcon icon={item.icon} className="text-xs" />
                         </div>
-                        
+
                         {index !== experienceData.length - 1 && (
                           <div className="h-0.5 w-8 bg-gradient-to-r from-blue-500/60 to-blue-500/30 dark:from-blue-400/60 dark:to-blue-400/30" />
                         )}
@@ -206,7 +206,7 @@ export default function Parcours() {
                         <div className="text-[9px] font-mono font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-0.5">
                           {item.period}
                         </div>
-                        <h4 
+                        <h4
                           style={{ fontFamily: "'Roboto Mono', monospace" }}
                           className="text-xs font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight"
                         >
@@ -223,65 +223,64 @@ export default function Parcours() {
                         </span>
                       </div>
                     </div>
-                  </div>
+                  </AnimatedSection>
                 ))}
               </div>
             </div>
+          </AnimatedSection>
 
-            <div className="lg:hidden px-4">
-              <div className="flex justify-center gap-4">
-                {experienceData.slice(currentPage * cardsPerPage, currentPage * cardsPerPage + cardsPerPage).map((item, idx) => {
-                  const actualIndex = currentPage * cardsPerPage + idx;
-                  return (
-                    <div key={actualIndex} className="relative group flex-shrink-0">
-                      <div className="flex flex-col items-center">
-                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 text-white dark:text-gray-950 flex items-center justify-center shadow-lg shadow-blue-500/30 dark:shadow-blue-400/30 group-hover:scale-110 transition-transform duration-300 z-10">
-                          <FontAwesomeIcon icon={item.icon} className="text-xs" />
-                        </div>
+          <AnimatedSection delay={0.2} className="lg:hidden px-4">
+            <div className="flex justify-center gap-4">
+              {experienceData.slice(currentPage * cardsPerPage, currentPage * cardsPerPage + cardsPerPage).map((item, idx) => {
+                const actualIndex = currentPage * cardsPerPage + idx;
+                return (
+                  <AnimatedSection key={actualIndex} delay={idx * 0.1} className="relative group flex-shrink-0">
+                    <div className="flex flex-col items-center">
+                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500 text-white dark:text-gray-950 flex items-center justify-center shadow-lg shadow-blue-500/30 dark:shadow-blue-400/30 group-hover:scale-110 transition-transform duration-300 z-10">
+                        <FontAwesomeIcon icon={item.icon} className="text-xs" />
+                      </div>
 
-                        <div className="mt-3 w-36 p-3 rounded-lg bg-white dark:bg-[#121624] border border-gray-200 dark:border-blue-400/20 shadow-sm dark:shadow-lg hover:border-blue-500/50 dark:hover:border-blue-400/60 transition-all duration-300 hover:-translate-y-1">
-                          <div className="text-[9px] font-mono font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-0.5">
-                            {item.period}
-                          </div>
-                          <h4 
-                            style={{ fontFamily: "'Roboto Mono', monospace" }}
-                            className="text-xs font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight"
-                          >
-                            {item.title}
-                          </h4>
-                          <div className="text-[8px] text-gray-500 dark:text-gray-400 mt-0.5 font-body">
-                            {item.location}
-                          </div>
-                          <p className="text-[9px] text-gray-600 dark:text-gray-400 leading-tight mt-1.5 font-body">
-                            {item.description}
-                          </p>
-                          <span className="inline-block mt-2 text-[8px] font-mono px-1.5 py-0.5 rounded-full bg-blue-500/10 dark:bg-blue-400/10 text-blue-700 dark:text-blue-300 border border-blue-500/20 dark:border-blue-400/20 font-semibold">
-                            {item.tag}
-                          </span>
+                      <div className="mt-3 w-36 p-3 rounded-lg bg-white dark:bg-[#121624] border border-gray-200 dark:border-blue-400/20 shadow-sm dark:shadow-lg hover:border-blue-500/50 dark:hover:border-blue-400/60 transition-all duration-300 hover:-translate-y-1">
+                        <div className="text-[9px] font-mono font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-0.5">
+                          {item.period}
                         </div>
+                        <h4
+                          style={{ fontFamily: "'Roboto Mono', monospace" }}
+                          className="text-xs font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight"
+                        >
+                          {item.title}
+                        </h4>
+                        <div className="text-[8px] text-gray-500 dark:text-gray-400 mt-0.5 font-body">
+                          {item.location}
+                        </div>
+                        <p className="text-[9px] text-gray-600 dark:text-gray-400 leading-tight mt-1.5 font-body">
+                          {item.description}
+                        </p>
+                        <span className="inline-block mt-2 text-[8px] font-mono px-1.5 py-0.5 rounded-full bg-blue-500/10 dark:bg-blue-400/10 text-blue-700 dark:text-blue-300 border border-blue-500/20 dark:border-blue-400/20 font-semibold">
+                          {item.tag}
+                        </span>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
-
-              <div className="flex justify-center gap-3 mt-6">
-                {Array.from({ length: totalPages }, (_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setCurrentPage(i)}
-                    className={`w-8 h-8 rounded-full font-mono font-bold text-xs transition-all duration-300 ${
-                      currentPage === i
-                        ? "bg-blue-500 dark:bg-blue-400 text-white dark:text-gray-950"
-                        : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-blue-500/20 dark:hover:bg-blue-400/20"
-                    }`}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
-              </div>
+                  </AnimatedSection>
+                );
+              })}
             </div>
-          </div>
+            <div className="flex justify-center gap-3 mt-6">
+              {Array.from({ length: totalPages }, (_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i)}
+                  className={`w-8 h-8 rounded-full font-mono font-bold text-xs transition-all duration-300 ${
+                    currentPage === i
+                      ? "bg-blue-500 dark:bg-blue-400 text-white dark:text-gray-950"
+                      : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-blue-500/20 dark:hover:bg-blue-400/20"
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
 
         <div className="flex items-center justify-center gap-4 mt-12">
@@ -294,31 +293,21 @@ export default function Parcours() {
           <div className="w-16 h-[1px] bg-gradient-to-l from-transparent via-blue-500/40 dark:via-blue-400/40 to-blue-500/80 dark:to-blue-400/80" />
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a 
-            href="#contact" 
-            className="px-8 py-3.5 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-0.5 font-body"
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="#contact"
+            className="px-6 py-3 text-sm bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-0.5 font-body"
           >
             Travaillons ensemble
           </a>
-          <a 
-            href="#projects" 
-            className="px-8 py-3.5 bg-white dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-900 dark:text-white font-semibold border border-gray-200 dark:border-white/10 rounded-xl transition-all duration-300 font-body"
+          <a
+            href="#projects"
+            className="px-6 py-3 text-sm bg-white dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-900 dark:text-white font-semibold border border-gray-200 dark:border-white/10 rounded-xl transition-all duration-300 font-body"
           >
             Voir mes projets
           </a>
         </div>
       </div>
-
-      <style>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </section>
     </AnimatedSection>
   );
