@@ -108,8 +108,8 @@ export default function Navbar() {
           
           <div className="pt-4 space-y-3 border-t border-gray-200 dark:border-white/10">
             <a
-              href="/images/CV_TIEMOUO.DORCAS.pdf"
-              download="CV_TIEMOUO.DORCAS.pdf"
+              href="/images/CV_TIEMOUO_DJIOLIO_DORCAS.pdf"
+              download="CV_TIEMOUO_DJIOLIO_DORCAS.pdf"
               onClick={() => setIsOpen(false)}
               className="flex items-center justify-center gap-2 w-full text-center px-4 py-2.5 text-sm font-semibold text-blue-500 dark:text-blue-400 bg-blue-500/10 dark:bg-blue-400/10 border border-blue-500/30 dark:border-blue-400/30 rounded-xl"
             >
