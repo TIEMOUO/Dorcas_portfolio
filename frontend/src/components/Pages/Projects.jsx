@@ -1,38 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { getProjects } from "../../services/api";
+import { projects, projectsPerPage } from "../../data/projects";
 import AnimatedSection, { StaggerContainer, StaggerItem } from "../Layout/AnimatedSection";
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const projectsPerPage = 2;
 
   const categories = [
     { id: "all", label: "Tous les projets" },
-    { id: "uiux", label: "UI/UX Design" },
-    { id: "web", label: "Développement Web" },
-    { id: "graphic", label: "Graphic Design" },
+    { id: "web", label: "Web" },
     { id: "mobile", label: "Mobile" },
+    { id: "uiux", label: "UI/UX" },
+    { id: "graphic", label: "Design graphique" },
   ];
-
-  useEffect(() => {
-    async function fetchProjects() {
-      try {
-        const data = await getProjects();
-        setProjects(data);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
-    }
-    fetchProjects();
-  }, []);
 
   const handleFilterChange = (categoryId) => {
     setActiveFilter(categoryId);
@@ -84,6 +65,8 @@ export default function Projects() {
               {categories.map((cat) => (
                 <button
                   key={cat.id}
+                  type="button"
+                  aria-pressed={activeFilter === cat.id}
                   onClick={() => handleFilterChange(cat.id)}
                   className={`text-left text-sm sm:text-base font-medium transition-all duration-300 relative py-1 font-body ${
                     activeFilter === cat.id
@@ -103,20 +86,6 @@ export default function Projects() {
           </div>
 
           <div className="lg:col-span-8 flex flex-col gap-6">
-            
-            {loading && (
-              <div className="flex justify-center items-center py-20">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-              </div>
-            )}
-
-            {error && (
-              <div className="text-center py-20 text-red-500">
-                <p>Erreur: {error}</p>
-              </div>
-            )}
-
-            {!loading && !error && (
             <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6" staggerDelay={0.1}>
               {displayedProjects.map((project) => (
                 <StaggerItem key={project.id}>
@@ -125,22 +94,30 @@ export default function Projects() {
                   >
                     <div>
                       <div className="relative h-40 overflow-hidden bg-gray-100 dark:bg-[#0a0e17]">
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          onError={(e) => {
-                            e.target.style.display = 'none';
-                          }}
-                        />
+                        {project.image ? (
+                          <img
+                            src={project.image}
+                            alt={`Aperçu de ${project.title}`}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-100 via-slate-100 to-sky-200 dark:from-blue-950/60 dark:via-[#111827] dark:to-slate-900">
+                            <span className="rounded-full border border-blue-500/20 bg-white/70 dark:bg-black/20 px-4 py-2 text-xs font-medium text-blue-700 dark:text-blue-200">
+                              Visuel du projet à ajouter
+                            </span>
+                          </div>
+                        )}
+                        <span className="absolute left-3 top-3 rounded-full border border-white/30 bg-white/90 dark:bg-[#0b0d14]/80 px-3 py-1 text-[10px] font-semibold text-blue-700 dark:text-blue-200">
+                          {categories.find((category) => category.id === project.category)?.label}
+                        </span>
                         <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#121624] via-transparent to-transparent opacity-60" />
                       </div>
 
                       <div className="p-4 space-y-2.5">
                         <div className="flex flex-wrap gap-1">
-                          {project.tags.map((tag, i) => (
+                          {project.tags.map((tag) => (
                             <span
-                              key={i}
+                              key={tag}
                               className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 dark:bg-blue-400/10 text-blue-700 dark:text-blue-300 border border-blue-500/20 dark:border-blue-400/20"
                             >
                               {tag}
@@ -158,22 +135,47 @@ export default function Projects() {
                         <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed line-clamp-2 font-body">
                           {project.description}
                         </p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed font-body">
+                          <span className="font-semibold text-gray-700 dark:text-gray-300">Rôle :</span>{" "}
+                          {project.role}
+                        </p>
                       </div>
                     </div>
 
-                    <div className="px-4 pb-4 pt-2 border-t border-gray-100 dark:border-white/5 text-xs">
+                    <div className="px-4 pb-4 pt-3 border-t border-gray-100 dark:border-white/5 flex flex-wrap items-center justify-between gap-3 text-xs">
                       <Link
                         to={`/projects/${project.id}`}
                         className="inline-flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold hover:underline font-body"
                       >
-                        Voir le projet
+                        Voir les détails
                       </Link>
+                      <div className="flex flex-wrap gap-3">
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-semibold text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-body"
+                          >
+                            GitHub
+                          </a>
+                        )}
+                        {project.demo && (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-semibold text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-body"
+                          >
+                            Démo
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </StaggerItem>
               ))}
             </StaggerContainer>
-            )}
 
             {pageCount > 1 && (
               <div className="flex flex-wrap justify-center gap-3 pt-4">

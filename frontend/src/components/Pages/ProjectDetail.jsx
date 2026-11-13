@@ -1,62 +1,21 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { getProjectById } from '../../services/api';
+import { useState } from 'react';
+import { projects } from '../../data/projects';
 import AnimatedSection from '../Layout/AnimatedSection';
+
+const categoryLabels = {
+  web: 'Web',
+  mobile: 'Mobile',
+  uiux: 'UI/UX',
+  graphic: 'Design graphique',
+};
 
 export default function ProjectDetail() {
   const navigate = useNavigate();
   const { projectId } = useParams();
-  const [project, setProject] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const project = projects.find((item) => String(item.id) === projectId) || null;
   const [currentPage, setCurrentPage] = useState(1);
   const screenshotsPerPage = 5;
-
-  useEffect(() => {
-    async function fetchProject() {
-      try {
-        const data = await getProjectById(projectId);
-        setProject(data);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
-    }
-    fetchProject();
-  }, [projectId]);
-
-  if (loading) {
-    return (
-      <section className="py-20 lg:py-28 bg-gray-50 dark:bg-[#0b0d14] text-gray-900 dark:text-white transition-colors duration-300">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
-        </div>
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section className="py-20 lg:py-28 bg-gray-50 dark:bg-[#0b0d14] text-gray-900 dark:text-white transition-colors duration-300">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center">
-          <p className="text-sm uppercase tracking-[0.3em] text-red-500 dark:text-red-400 mb-4">
-            Erreur
-          </p>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6">
-            {error}
-          </h1>
-          <button
-            type="button"
-            onClick={() => navigate('/')}
-            className="inline-flex items-center justify-center rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white hover:bg-blue-600 transition"
-          >
-            Retour à la page de projets
-          </button>
-        </div>
-      </section>
-    );
-  }
 
   if (!project) {
     return (
@@ -115,6 +74,15 @@ export default function ProjectDetail() {
             <p className="text-lg leading-8 text-gray-600 dark:text-gray-300 max-w-2xl">
               {project.long_description}
             </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="rounded-full bg-blue-100 dark:bg-blue-400/10 px-4 py-1.5 text-xs font-semibold text-blue-700 dark:text-blue-300">
+                {categoryLabels[project.category] || project.category}
+              </span>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                <span className="font-semibold text-gray-900 dark:text-white">Mon rôle :</span>{" "}
+                {project.role}
+              </p>
+            </div>
             <div className="flex flex-wrap gap-2">
               {project.tags.map((tag) => (
                 <span
@@ -175,7 +143,11 @@ export default function ProjectDetail() {
       <section className="py-16 lg:py-20 bg-gray-50 dark:bg-[#0b0d14] text-gray-900 dark:text-white transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
           {(() => {
-            const allScreenshots = project.screenshots || [];
+            const allScreenshots = project.screenshots?.length
+              ? project.screenshots
+              : project.image
+                ? [{ image: project.image }]
+                : [];
             const totalScreenshots = allScreenshots.length;
             const pageCount = Math.max(1, Math.ceil(totalScreenshots / screenshotsPerPage));
             const startIndex = (currentPage - 1) * screenshotsPerPage;
@@ -197,29 +169,38 @@ export default function ProjectDetail() {
 
             return (
               <>
-                <div className="space-y-4">
-                  {rows.map((row, rowIndex) => (
-                    <div
-                      key={rowIndex}
-                      className={`flex justify-center gap-4 ${
-                        row.type === 'pair' ? 'max-w-4xl mx-auto' : ''
-                      }`}
-                    >
-                      {row.items.map((screenshot, index) => (
-                        <div
-                          key={index}
-                          className="overflow-hidden rounded-2xl bg-[#f8fafc] dark:bg-[#121624] border border-gray-200 dark:border-white/10 shadow-sm dark:shadow-black/20 flex-1 max-w-xl"
-                        >
-                          <img
-                            src={screenshot.image}
-                            alt={`${project.title} capture ${startIndex + rowIndex * 5 + index + 1}`}
-                            className="w-full h-48 sm:h-56 lg:h-64 object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                </div>
+                {screenshots.length ? (
+                  <div className="space-y-4">
+                    {rows.map((row, rowIndex) => (
+                      <div
+                        key={rowIndex}
+                        className={`flex justify-center gap-4 ${
+                          row.type === 'pair' ? 'max-w-4xl mx-auto' : ''
+                        }`}
+                      >
+                        {row.items.map((screenshot, index) => (
+                          <div
+                            key={index}
+                            className="overflow-hidden rounded-2xl bg-[#f8fafc] dark:bg-[#121624] border border-gray-200 dark:border-white/10 shadow-sm dark:shadow-black/20 flex-1 max-w-xl"
+                          >
+                            <img
+                              src={screenshot.image}
+                              alt={`${project.title} capture ${startIndex + rowIndex * 5 + index + 1}`}
+                              className="w-full h-48 sm:h-56 lg:h-64 object-cover"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="rounded-2xl border border-dashed border-gray-300 dark:border-white/15 bg-white/70 dark:bg-[#121624] px-6 py-16 text-center">
+                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Visuel du projet à ajouter</p>
+                    <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                      Les captures pourront être ajoutées ici lorsque disponibles.
+                    </p>
+                  </div>
+                )}
 
                 {pageCount > 1 && (
                   <div className="flex flex-wrap justify-center gap-3 mt-8">

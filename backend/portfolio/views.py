@@ -5,6 +5,7 @@ from django.db.models import Prefetch
 from .models import Project, Blog, ProjectScreenshot, Service, Skill, Experience, Contact, Like, Comment, CommentLike
 from .serializers import (
     ProjectSerializer,
+    ProjectScreenshotSerializer,
     BlogSerializer,
     ServiceSerializer,
     SkillSerializer,
@@ -22,10 +23,12 @@ class ProjectViewSet(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
 
 class ProjectScreenshotViewSet(viewsets.ModelViewSet):
-   
+    queryset = ProjectScreenshot.objects.all()
+    serializer_class = ProjectScreenshotSerializer
+
     def get_queryset(self):
         project_id = self.kwargs.get('project_id')
-        return ProjectScreenshot.objects.filter(project_id=project_id)    
+        return ProjectScreenshot.objects.filter(project_id=project_id)
 
 
 class BlogViewSet(viewsets.ModelViewSet):

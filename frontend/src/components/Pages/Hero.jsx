@@ -6,7 +6,6 @@ export default function Hero() {
     { name: "React", icon: "fa-brands fa-react" },
     { name: "Angular", icon: "fa-brands fa-angular" },
     { name: "JavaScript", icon: "fa-brands fa-js" },
-    { name: "Node.js", icon: "fa-brands fa-node-js" },
     { name: "Tailwind CSS", icon: "fa-brands fa-tailwind" },
     { name: "Bootstrap", icon: "fa-brands fa-bootstrap" },
     { name: "Git", icon: "fa-brands fa-git-alt" },
@@ -469,7 +468,7 @@ export default function Hero() {
                     text-gray-700
                   "
                 >
-                  Creative Tech
+                Entrepreuneure Tech
                 </span>
               </div>
 
@@ -854,7 +853,7 @@ export default function Hero() {
         ===================================================== */}
 
         <div
-          id="skills"
+          id="technology-strip"
           className="
             relative
             z-20

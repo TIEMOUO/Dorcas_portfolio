@@ -6,6 +6,12 @@ import { faEnvelope, faPhone, faLocationDot } from "@fortawesome/free-solid-svg-
 import { faLinkedin, faGithub, faBehance } from "@fortawesome/free-brands-svg-icons";
 import AnimatedSection from "../Layout/AnimatedSection";
 
+const socialLinks = [
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/dorcas-tiemouo-166131351/", icon: faLinkedin },
+  { name: "GitHub", href: "https://github.com/TIEMOUO", icon: faGithub },
+  { name: "Behance", href: "https://www.behance.net/dorcastiemouo", icon: faBehance },
+];
+
 export default function Contact() {
   const formRef = useRef();
   const [loading, setLoading] = useState(false);
@@ -173,7 +179,25 @@ export default function Contact() {
                 </div>
               </div>
 
-              
+              <div className="mt-8 pt-6 border-t border-gray-200 dark:border-white/10">
+                <p className="text-xs uppercase tracking-[0.2em] text-gray-500 dark:text-gray-400 mb-4 font-body">
+                  Réseaux sociaux
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  {socialLinks.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={link.name}
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-gray-700 dark:text-gray-200 transition-colors hover:border-blue-500 hover:text-blue-500 dark:hover:border-blue-400 dark:hover:text-blue-400"
+                    >
+                      <FontAwesomeIcon icon={link.icon} />
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

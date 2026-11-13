@@ -47,7 +47,11 @@ src/
 
 ## Editing content
 
-Everything you will want to personalize — name, journey stages, projects, tech stack, roadmap, experience, "Building in Public" log — lives in `src/data/content.js`. Components stay purely presentational.
+Skills, projects, and blog posts are bundled with the frontend and do not require the backend:
+
+- Edit skills in `src/data/skills.js`, projects in `src/data/projects.js`, and blog posts in `src/data/blogs.js`.
+- Add their images under `public/images/` and reference them with paths such as `/images/projects/portfolio.png`.
+- Set the Vercel project root directory to `frontend`. The deployment serves the React app and static assets; project and blog detail routes are handled by the SPA rewrite.
 
 ## Notes
 

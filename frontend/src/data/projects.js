@@ -1,83 +1,63 @@
-export const projectsPerPage = 2;
+export const projectsPerPage = 4;
 
 export const projects = [
   {
     id: 1,
-    title: 'TASKFLOW - Dashboard Analytics',
+    title: 'Portfolio personnel',
     category: 'web',
-    image: '/projects/project1.png',
-    screenshots: ['/projects/project1.png', '/projects/project1.png'],
-    description: 'Plateforme de gestion collaborative pour les projets et les tâches.',
-    longDescription:
-      "Plateforme SaaS Analytics permettant aux équipes produit et marketing de suivre les indicateurs clés de performance dans un design clair et réactif.",
-    tags: ['React', 'Tailwind CSS'],
-    demo: 'https://example.com',
-    github: 'https://github.com',
+    image: '/images/projects/portfolio.png',
+    screenshots: [{ image: '/images/projects/portfolio-screenshot.png' }],
+    description: 'Un portfolio responsive qui réunit présentation, projets, parcours et articles.',
+    long_description:
+      'Un projet personnel conçu pour présenter mon parcours et mes réalisations, avec une interface React et un backend Django.',
+    role: 'Conception et développement du portfolio, de l’interface React aux fonctionnalités backend Django.',
+    tags: ['React', 'Django', 'API REST', 'SQLite', 'Tailwind CSS'],
+    github: 'https://github.com/TIEMOUO/Dorcas_portfolio',
+    demo: '',
   },
   {
     id: 2,
-    title: 'Redesign App Mobile E-commerce',
-    category: 'uiux',
-    image: '/projects/project2.png',
-    screenshots: ['/projects/project2.png', '/projects/project2.png'],
+    title: 'VELORA — Location de véhicules',
+    category: 'web',
+    image: '',
+    screenshots: [],
     description:
-      'Conception d’un Design System complet et maquettes haute fidélité pour application mobile.',
-    longDescription:
-      "Refonte d'une application mobile e-commerce avec un parcours utilisateur fluide, des animations douces et un design centré sur la conversion.",
-    tags: ['Figma', 'UI/UX'],
-    demo: 'https://example.com',
-    figma: 'https://figma.com',
+      'Projet académique de conception d’une application de location organisée autour d’une facturation horaire.',
+    long_description:
+      'Le projet porte sur l’analyse fonctionnelle et la définition des règles métier pour les demandes de réservation, la disponibilité des véhicules et le suivi des locations. Les technologies envisagées sont Python et Flask ; toutes les fonctionnalités ne sont pas présentées comme déjà développées.',
+    role: 'Analyse fonctionnelle, définition des règles métier et cadrage des parcours de réservation et de location.',
+    tags: ['Python', 'Flask'],
+    github: '',
+    demo: '',
   },
   {
     id: 3,
-    title: 'Identité Visuelle & Branding',
-    category: 'graphic',
-    image: '/projects/graphic1.png',
-    screenshots: ['/projects/graphic1.png', '/projects/graphic1.png'],
-    description: 'Création complète d’une identité de marque : charte graphique, logo et supports.',
-    longDescription:
-      "Projet de branding avec une identité visuelle cohérente, du logo aux supports imprimés, pour renforcer la reconnaissance de marque.",
-    tags: ['Branding', 'Illustrator'],
-    behance: 'https://behance.net',
+    title: 'Application mobile .NET MAUI',
+    category: 'mobile',
+    image: '',
+    screenshots: [],
+    description:
+      'Application mobile fonctionnelle, avec une contribution centrée sur l’interface et les interactions côté client.',
+    long_description:
+      'Le travail réalisé concerne principalement le frontend : création des interfaces, navigation entre les écrans et interactions côté client.',
+    role: 'Réalisation des interfaces, de la navigation et des interactions côté client.',
+    tags: ['.NET MAUI'],
+    github: '',
+    demo: '',
   },
   {
     id: 4,
-    title: 'App Santé & Bien-être',
-    category: 'mobile',
-    image: '/projects/project4.png',
-    screenshots: ['/projects/project4.png', '/projects/project4.png'],
-    description: 'Prototype interactif d’une application de suivi d’habitudes quotidiennes.',
-    longDescription:
-      "Application mobile dédiée au bien-être, proposant un suivi des habitudes, des rappels et des recommandations UX pour maintenir la motivation.",
-    tags: ['Mobile UI', 'Figma'],
-    demo: 'https://example.com',
-    figma: 'https://figma.com',
-  },
-  {
-    id: 5,
-    title: 'Dashboard FinTech & Crypto',
-    category: 'uiux',
-    image: '/projects/project6.png',
-    screenshots: ['/projects/project6.png', '/projects/project6.png'],
-    description:
-      'UX Research et maquettes d’un portefeuille de gestion d’actifs numériques.',
-    longDescription:
-      "Conception d’un dashboard FinTech pour surveiller les actifs crypto, avec des indicateurs clairs et un design axé sur la confiance.",
-    tags: ['FinTech', 'Figma'],
-    demo: 'https://example.com',
-  },
-  {
-    id: 6,
-    title: 'Site Vitrine Éco-responsable',
+    title: 'AfrikPay — Dashboard multi-tenant',
     category: 'web',
-    image: '/projects/project5.png',
-    screenshots: ['/projects/project5.png', '/projects/project5.png'],
+    image: '',
+    screenshots: [],
     description:
-      'Site web moderne à faible empreinte carbone optimisé pour le référencement.',
-    longDescription:
-      "Site vitrine éco-responsable pensé pour limiter les ressources, optimiser le chargement et valoriser une communication durable.",
-    tags: ['JavaScript', 'Eco-design'],
-    github: 'https://github.com',
-    demo: 'https://example.com',
+      'Amélioration des interfaces d’un tableau de bord Django et Django Unfold dans le cadre de mon stage.',
+    long_description:
+      'Contribution orientée interface et présentation des données : amélioration des tableaux, des filtres, de l’affichage des transactions, de la navigation et du responsive design.',
+    role: 'Amélioration des interfaces du dashboard et de la lisibilité des données, sans revendication sur l’architecture ou la logique backend.',
+    tags: ['Django', 'Django Unfold'],
+    github: '',
+    demo: '',
   },
 ];
