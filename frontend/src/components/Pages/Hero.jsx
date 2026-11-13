@@ -511,8 +511,8 @@ export default function Hero() {
                   </a>
 
                   <a
-                    href="/images/CV_TIEMOUO_DJIOLIO_DORCAS.pdf"
-                    download="CV_TIEMOUO_DJIOLIO_DORCAS.pdf"
+                    href="/images/CV_TIEMOUO%20DJIOLIO%20DORCAS.pdf"
+                    download="CV_TIEMOUO DJIOLIO DORCAS.pdf"
                     className="
                       px-6
                       py-3
@@ -823,8 +823,8 @@ export default function Hero() {
               Voir mes projets
             </a>
             <a
-              href="/images/CV_TIEMOUO_DJIOLIO_DORCAS.pdf"
-              download="CV_TIEMOUO_DJIOLIO_DORCAS.pdf"
+              href="/images/CV_TIEMOUO%20DJIOLIO%20DORCAS.pdf"
+              download="CV_TIEMOUO DJIOLIO DORCAS.pdf"
               className="px-6 py-3 border border-gray-300 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-semibold rounded-lg transition-all duration-300"
             >
               Télécharger mon CV
